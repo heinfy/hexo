@@ -44,21 +44,21 @@
 
 
 
-<link href="/test/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/test/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/test/images/apple-touch-icon-next.png?v=5.1.4">
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/test/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/test/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/test/images/logo.svg?v=5.1.4" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
 
 
 
@@ -82,16 +82,16 @@
 <meta property="og:site_name" content="heinfy&#39;s Blog">
 <meta property="og:description" content="日历组件效果 忙活了大概三天，做出来非常开心，心里美滋滋的 其实很早就想自己写一个日历组件了，只怪自己懒散 现在写一下思路过程，记录一下   需求1、实现一个日历组件，如图：  2、显示某天的事项：  3、事项是模拟父组件请求接口返回的，数据格式如下： 12345678910111213141516171819202122[  &amp;#123;    id: &amp;#x27;232&amp;#x27;,">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/test/posts/3b43e344/%E5%B0%81%E8%A3%85%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/calendar.gif">
-<meta property="og:image" content="http://example.com/test/posts/3b43e344/%E5%B0%81%E8%A3%85%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/20190606223710.png">
-<meta property="og:image" content="http://example.com/test/posts/3b43e344/%E5%B0%81%E8%A3%85%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/1559832421561.png">
-<meta property="og:image" content="http://example.com/test/posts/3b43e344/%E5%B0%81%E8%A3%85%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/2019-06-06_22-54-19.png">
+<meta property="og:image" content="http://example.com/blog/posts/3b43e344/calendar.gif">
+<meta property="og:image" content="http://example.com/blog/posts/3b43e344/20190606223710.png">
+<meta property="og:image" content="http://example.com/blog/posts/3b43e344/1559832421561.png">
+<meta property="og:image" content="http://example.com/blog/posts/3b43e344/2019-06-06_22-54-19.png">
 <meta property="article:published_time" content="2019-06-06T16:23:20.000Z">
 <meta property="article:modified_time" content="2022-03-07T14:50:02.964Z">
 <meta property="article:author" content="heinfy">
 <meta property="article:tag" content="vue.js">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/test/posts/3b43e344/%E5%B0%81%E8%A3%85%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/calendar.gif">
+<meta name="twitter:image" content="http://example.com/blog/posts/3b43e344/calendar.gif">
 
 
 
@@ -155,7 +155,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/test/"  class="brand" rel="start">
+      <a href="/blog/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">heinfy's Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -183,7 +183,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/test/" rel="section">
+          <a href="/blog/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -203,7 +203,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/test/tags" rel="section">
+          <a href="/blog/tags" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -213,7 +213,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/test/categories" rel="section">
+          <a href="/blog/categories" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th-list"></i> <br />
             
@@ -223,7 +223,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/test/archives" rel="section">
+          <a href="/blog/archives" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -308,12 +308,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/test/posts/3b43e344.html">
+    <link itemprop="mainEntityOfPage" href="http://example.com/blog/posts/3b43e344.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/test/images/avatar.jpg">
+      <meta itemprop="image" content="/blog/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -372,7 +372,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/test/categories/vue-js/" itemprop="url" rel="index">
+                  <a href="/blog/categories/vue-js/" itemprop="url" rel="index">
                     <span itemprop="name">vue.js</span>
                   </a>
                 </span>
@@ -390,8 +390,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/test/posts/3b43e344.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/test/posts/3b43e344.html" itemprop="commentCount"></span>
+                <a href="/blog/posts/3b43e344.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/blog/posts/3b43e344.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -426,16 +426,16 @@
 <p>其实很早就想自己写一个日历组件了，只怪自己懒散</p>
 <p>现在写一下思路过程，记录一下</p>
 </blockquote>
-<p><img src="/test/posts/3b43e344/%E5%B0%81%E8%A3%85%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/calendar.gif" alt="calendar"></p>
+<p><img src="/blog/posts/3b43e344/calendar.gif" alt="calendar"></p>
 <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>1、实现一个日历组件，如图：</p>
-<p><img src="/test/posts/3b43e344/%E5%B0%81%E8%A3%85%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/20190606223710.png" alt="20190606223710"></p>
+<p><img src="/blog/posts/3b43e344/20190606223710.png" alt="20190606223710"></p>
 <p>2、显示某天的事项：</p>
-<p><img src="/test/posts/3b43e344/%E5%B0%81%E8%A3%85%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/1559832421561.png" alt="1559832421561"></p>
+<p><img src="/blog/posts/3b43e344/1559832421561.png" alt="1559832421561"></p>
 <p>3、事项是模拟父组件请求接口返回的，数据格式如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;232&#x27;</span>,</span><br><span class="line">    <span class="attr">date</span>: <span class="string">&#x27;2019-06-01&#x27;</span>,</span><br><span class="line">    <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;292&#x27;</span>,</span><br><span class="line">    <span class="attr">date</span>: <span class="string">&#x27;2019-06-06&#x27;</span>,</span><br><span class="line">    <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;292&#x27;</span>,</span><br><span class="line">    <span class="attr">date</span>: <span class="string">&#x27;2019-06-07&#x27;</span>,</span><br><span class="line">    <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;369&#x27;</span>,</span><br><span class="line">    <span class="attr">date</span>: <span class="string">&#x27;2019-06-30&#x27;</span>,</span><br><span class="line">    <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
 
 <p>4、把事项添加到日历组件中，数据格式如下：</p>
-<p><img src="/test/posts/3b43e344/%E5%B0%81%E8%A3%85%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6/2019-06-06_22-54-19.png" alt="2019-06-06_22-54-19"></p>
+<p><img src="/blog/posts/3b43e344/2019-06-06_22-54-19.png" alt="2019-06-06_22-54-19"></p>
 <h2 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h2><p><strong>package.json 文件：</strong></p>
 <p>父组件页面：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;test-container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Test页面，测试组件<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 日历 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">calendar</span> <span class="attr">v-if</span>=<span class="string">&quot;calendarVisible&quot;</span> @<span class="attr">getDateInfo</span>=<span class="string">&quot;getDateInfo&quot;</span> <span class="attr">:propsInfoList</span>=<span class="string">&quot;propsInfoList&quot;</span> <span class="attr">:propsTime</span>=<span class="string">&quot;propsTime&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">calendar</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">import</span> calendar <span class="keyword">from</span> <span class="string">&#x27;@/components/Calendar/Calendar.vue&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">name</span>: <span class="string">&#x27;test&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">components</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">calendar</span>: calendar</span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">data</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">calendarVisible</span>: <span class="literal">true</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">propsTime</span>: <span class="string">&#x27;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">propsInfoList</span>: <span class="string">&#x27;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">middle</span>: [</span></span><br><span class="line"><span class="language-javascript">          &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">id</span>: <span class="string">&#x27;232&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">date</span>: <span class="string">&#x27;2019-06-01&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span></span><br><span class="line"><span class="language-javascript">          &#125;,</span></span><br><span class="line"><span class="language-javascript">          &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">id</span>: <span class="string">&#x27;292&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">date</span>: <span class="string">&#x27;2019-06-06&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span></span><br><span class="line"><span class="language-javascript">          &#125;,</span></span><br><span class="line"><span class="language-javascript">          &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">id</span>: <span class="string">&#x27;292&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">date</span>: <span class="string">&#x27;2019-06-07&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span></span><br><span class="line"><span class="language-javascript">          &#125;,</span></span><br><span class="line"><span class="language-javascript">          &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">id</span>: <span class="string">&#x27;369&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">date</span>: <span class="string">&#x27;2019-06-30&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span></span><br><span class="line"><span class="language-javascript">          &#125;</span></span><br><span class="line"><span class="language-javascript">        ]</span></span><br><span class="line"><span class="language-javascript">      &#125;;</span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">created</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// 模拟首屏ajax请求，将当月数据传入组件中</span></span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">this</span>.<span class="property">propsInfoList</span> = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(<span class="variable language_">this</span>.<span class="property">middle</span>);</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">this</span>.<span class="property">propsTime</span> = <span class="variable language_">this</span>.<span class="title function_">getToday</span>();</span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">window</span>.<span class="title function_">alert</span>(<span class="string">&#x27;测试时间为19年 5、6、7月，完成是在6月&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">methods</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// 格式化当前日期 YYYY-MM-DD</span></span></span><br><span class="line"><span class="language-javascript">      <span class="title function_">getToday</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">let</span> nowDate = <span class="keyword">new</span> <span class="title class_">Date</span>();</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">let</span> yy = nowDate.<span class="title function_">getFullYear</span>().<span class="title function_">toString</span>();</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">let</span> mm = (nowDate.<span class="title function_">getMonth</span>() + <span class="number">1</span> + <span class="string">&#x27;&#x27;</span>).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">let</span> dd = (nowDate.<span class="title function_">getDate</span>() + <span class="string">&#x27;&#x27;</span>).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// let hh = nowDate.getHours().toString().padStart(2,&#x27;0&#x27;)</span></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// let mt = (nowDate.getMinutes() + &#x27;&#x27;).padStart(2,&#x27;0&#x27;)</span></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// let ss = (nowDate.getSeconds() + &#x27;&#x27;).padStart(2,&#x27;0&#x27;)</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;yy&#125;</span>-<span class="subst">$&#123;mm&#125;</span>-<span class="subst">$&#123;dd&#125;</span>`</span>; <span class="comment">// -$&#123;hh&#125;-$&#123;mt&#125;-$&#123;ss&#125;</span></span></span><br><span class="line"><span class="language-javascript">      &#125;,</span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// 组件传值</span></span></span><br><span class="line"><span class="language-javascript">      <span class="title function_">getDateInfo</span>(<span class="params">year, month</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">let</span> _this = <span class="variable language_">this</span>;</span></span><br><span class="line"><span class="language-javascript">        _this.<span class="property">propsTime</span> = <span class="string">`<span class="subst">$&#123;year&#125;</span>-<span class="subst">$&#123;month&#125;</span>`</span>;</span></span><br><span class="line"><span class="language-javascript">        _this.<span class="property">calendarVisible</span> = <span class="literal">false</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 模拟点击选取其他年月的ajax，假数据，只能显示19年 5 6 7三个月</span></span></span><br><span class="line"><span class="language-javascript">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">          _this.<span class="property">propsInfoList</span> = [];</span></span><br><span class="line"><span class="language-javascript">          <span class="keyword">let</span> middle;</span></span><br><span class="line"><span class="language-javascript">          <span class="keyword">if</span> (month == <span class="string">&#x27;05&#x27;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            middle = [</span></span><br><span class="line"><span class="language-javascript">              &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">id</span>: <span class="string">&#x27;232&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">date</span>: <span class="string">&#x27;2019-05-10&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">info</span>: <span class="string">&#x27;我要去吃小餐&#x27;</span></span></span><br><span class="line"><span class="language-javascript">              &#125;</span></span><br><span class="line"><span class="language-javascript">            ];</span></span><br><span class="line"><span class="language-javascript">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (month == <span class="string">&#x27;06&#x27;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            middle = _this.<span class="property">middle</span>;</span></span><br><span class="line"><span class="language-javascript">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (month == <span class="string">&#x27;07&#x27;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            middle = [</span></span><br><span class="line"><span class="language-javascript">              &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">id</span>: <span class="string">&#x27;232&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">date</span>: <span class="string">&#x27;2019-07-10&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">info</span>: <span class="string">&#x27;我要去吃小餐&#x27;</span></span></span><br><span class="line"><span class="language-javascript">              &#125;</span></span><br><span class="line"><span class="language-javascript">            ];</span></span><br><span class="line"><span class="language-javascript">          &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            middle = <span class="string">&#x27;&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">          &#125;</span></span><br><span class="line"><span class="language-javascript">          _this.<span class="property">propsInfoList</span> = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(middle);</span></span><br><span class="line"><span class="language-javascript">          _this.<span class="property">calendarVisible</span> = <span class="literal">true</span>;</span></span><br><span class="line"><span class="language-javascript">        &#125;, <span class="number">100</span>);</span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">  &#125;;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -465,7 +465,7 @@
       
         <div class="post-tags">
           
-            <a href="/test/tags/vue-js/" rel="tag"># vue.js</a>
+            <a href="/blog/tags/vue-js/" rel="tag"># vue.js</a>
           
         </div>
       
@@ -484,7 +484,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/test/posts/12cd2a8e.html" rel="prev" title="XXS攻击">
+              <a href="/blog/posts/12cd2a8e.html" rel="prev" title="XXS攻击">
                 XXS攻击 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -556,7 +556,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/test/images/avatar.jpg"
+                src="/blog/images/avatar.jpg"
                 alt="" />
             
               <p class="site-author-name" itemprop="name"></p>
@@ -568,7 +568,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/test/archives%7C%7Carchive">
+                <a href="/blog/archives%7C%7Carchive">
               
                   <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
@@ -580,7 +580,7 @@
               
               
               <div class="site-state-item site-state-categories">
-                <a href="/test/categories/index.html">
+                <a href="/blog/categories/index.html">
                   <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
@@ -591,7 +591,7 @@
               
               
               <div class="site-state-item site-state-tags">
-                <a href="/test/tags/index.html">
+                <a href="/blog/tags/index.html">
                   <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
@@ -722,64 +722,64 @@
 
   
   
-    <script type="text/javascript" src="/test/lib/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
   
 
   
   
-    <script type="text/javascript" src="/test/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
   
 
   
   
-    <script type="text/javascript" src="/test/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
   
 
   
   
-    <script type="text/javascript" src="/test/lib/velocity/velocity.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="/test/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="/test/lib/canvas-nest/canvas-nest.min.js"></script>
+    <script type="text/javascript" src="/blog/lib/canvas-nest/canvas-nest.min.js"></script>
   
-
-
-  
-
-
-  <script type="text/javascript" src="/test/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/test/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/test/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/test/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/test/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/test/js/src/post-details.js?v=5.1.4"></script>
-
 
 
   
 
 
-  <script type="text/javascript" src="/test/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -814,9 +814,9 @@
 
 
 
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
+  <script src="//cdn.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
+
   <script type="text/javascript">
     var GUEST = ['nick','mail','link'];
     var guest = 'nick,mail,link';
@@ -851,7 +851,7 @@
     } else if (/json$/i.test(search_path)) {
       isXml = false;
     }
-    var path = "/test/" + search_path;
+    var path = "/blog/" + search_path;
     // monitor main search box;
 
     var onPopupClose = function (e) {

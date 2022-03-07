@@ -14,7 +14,7 @@ timezone: Asia/Shanghai #时区
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 # url: http://lightui.top
-root: /test
+root: /blog
 permalink: posts/:abbrlink.html
 # abbrlink config
 # abbrlink:
