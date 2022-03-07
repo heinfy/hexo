@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MongoDB," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Mongoose 是基于 nodejs，使用 javascript 编程，连接 mongodb 数据库的软件包，使 mongodb 的文档数据模型变的优雅起来，方便对 mongodb 文档型数据库的连接和增删改查等常规数据操作。 mongoose 是当前使用 mean（mongodb express angularjs nodejs）全栈开发必用的连接数据库软件包。 参考资料： 在线数据库 m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mongoose">
+<meta property="og:url" content="http://example.com/posts/40119.html">
+<meta property="og:site_name" content="heinfy&#39;s Blog">
+<meta property="og:description" content="Mongoose 是基于 nodejs，使用 javascript 编程，连接 mongodb 数据库的软件包，使 mongodb 的文档数据模型变的优雅起来，方便对 mongodb 文档型数据库的连接和增删改查等常规数据操作。 mongoose 是当前使用 mean（mongodb express angularjs nodejs）全栈开发必用的连接数据库软件包。 参考资料： 在线数据库 m">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-06-18T07:20:24.000Z">
+<meta property="article:modified_time" content="2022-03-07T14:51:02.566Z">
+<meta property="article:author" content="heinfy">
+<meta property="article:tag" content="MongoDB">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/posts/40119.html"/>
+
+
+
+
+
+  <title>Mongoose | heinfy's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">heinfy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">写我所想</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a target="_blank" href="https://github.com/heinfy" rel="section noopener">
+            
+              <i class="menu-item-icon fa fa-fw fa-github"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th-list"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-note">
+          <a target="_blank" href="https://www.cnblogs.com/houfee/" rel="section noopener">
+            
+              <i class="menu-item-icon fa fa-fw fa-sticky-note-o"></i> <br />
+            
+            note
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/40119.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="heinfy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mongoose</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-18T15:20:24+08:00">
+                2020-06-18
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-03-07T22:51:02+08:00">
+                2022-03-07
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/40119.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/40119.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <span id="more"></span>
+
+<p>Mongoose 是基于 nodejs，使用 javascript 编程，连接 mongodb 数据库的软件包，使 mongodb 的文档数据模型变的优雅起来，方便对 mongodb 文档型数据库的连接和增删改查等常规数据操作。</p>
+<p>mongoose 是当前使用 mean（mongodb express angularjs nodejs）全栈开发必用的连接数据库软件包。</p>
+<p>参考资料：</p>
+<p><a target="_blank" rel="noopener" href="https://mlab.com/">在线数据库</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.mongoosejs.net/docs/guide.html">mongoose guide</a></p>
+<h2 id="后台与数据库交互"><a href="#后台与数据库交互" class="headerlink" title="后台与数据库交互"></a>后台与数据库交互</h2><ul>
+<li>使用数据库的原生语言（例如 SQL）</li>
+<li>使用对象数据模型（Object Data Model，简称 ODM）或对象关系模型（Object Relational Model，简称 ORM）。 ODM &#x2F; ORM 能将网站中的数据表示为 JavaScript 对象，然后将它们映射到底层数据库。一些 ORM 只适用某些特定数据库，还有一些是普遍适用的。</li>
+</ul>
+<p>使用 SQL 或其它受到支持的查询语言才能达到最佳性能。</p>
+<p>ODM 通常慢一些，因为在对象和数据库格式之间存在一层用于映射的翻译代码，使它不一定会选用最高性能的数据库查询（尤其是普遍使用级别的 ODM，它必须在各类数据库功能方面做出更大的折衷）。</p>
+<p>使用 ORM 的好处是：程序员可以继续用 JavaScript 对象的思维而不用转向数据库语义的思维。 在（同一个或不同网站）使用不同数据库时尤为明显。使用 ORM 还可以更方便地对数据进行验证和检查。</p>
+<h2 id="Mongoose"><a href="#Mongoose" class="headerlink" title="Mongoose"></a>Mongoose</h2><ul>
+<li>Mongoose 是在 node.js 异步环境下对 mongodb 进行便捷操作的对象模型工具</li>
+</ul>
+<p>Mongoose 的优点：</p>
+<ul>
+<li>可以为文档创建一个模式结构（Schema）</li>
+<li>可以对模型中的对象&#x2F;文档进行验证</li>
+<li>数据可以通过类型转换为对象模型</li>
+<li>可以使用中间件来应用业务逻辑挂钩</li>
+<li>比 Node 原生的 MongoDB 驱动更容易<br>Mongoose 是最受欢迎的 ODM，选用 MongoDB 数据库时，它是一个合理的选择。</li>
+</ul>
+<p>新的对象：</p>
+<ul>
+<li>Schema（模式对象）<br>— Schema 对象定义约束了数据库中的文档结构</li>
+<li>Model<br>— Model 对象作为集合中的所有文件的表示，相当于 MondoDB 数据库中的集合 collection</li>
+<li>Document<br>— Document 表示集合中的具体文档，相当于集合中的一个具体的文档</li>
+</ul>
+<h3 id="mongoose-连接数据库"><a href="#mongoose-连接数据库" class="headerlink" title="mongoose 连接数据库"></a>mongoose 连接数据库</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.下载 npm init -y &amp; npm i mongoose -S</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.引入 mongoose</span></span><br><span class="line"><span class="keyword">const</span> mongoose = <span class="built_in">require</span>(<span class="string">&#x27;mongoose&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4.监听mongoDB数据库的连接状态</span></span><br><span class="line">mongoose.<span class="property">connection</span>.<span class="title function_">once</span>(<span class="string">&#x27;open&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;成功连接到 mongoDB 数据库&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">mongoose.<span class="property">connection</span>.<span class="title function_">once</span>(<span class="string">&#x27;close&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;断开 mongoDB 数据库&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.连接数据库</span></span><br><span class="line"><span class="comment">// mongoose.connect(&#x27;mongodb://数据库ip地址:端口号(默认：27017)/数据库名&#x27;)</span></span><br><span class="line">mongoose.<span class="title function_">connect</span>(</span><br><span class="line">  <span class="string">&#x27;mongodb://127.0.0.1/test&#x27;</span>,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">useNewUrlParser</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">useUnifiedTopology</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function">(<span class="params">err, db</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;连接数据库成功&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// mongoose 断开连接</span></span><br><span class="line"><span class="comment">// mongoose.disconnect()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个schema</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Schema</span> = mongoose.<span class="property">Schema</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// model模型</span></span><br><span class="line"><span class="keyword">const</span> stuSchema = <span class="keyword">new</span> <span class="title class_">Schema</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="title class_">String</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="title class_">Number</span>,</span><br><span class="line">  <span class="attr">gender</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">String</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="string">&#x27;female&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">address</span>: <span class="title class_">String</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个 model -&gt; collection # mogoose.model(modelName, schema)</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">StuModel</span> = mongoose.<span class="title function_">model</span>(<span class="string">&#x27;stus&#x27;</span>, stuSchema);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试：创建一个文档插入到数据库中</span></span><br><span class="line"><span class="comment">// StuModel.create(&#123;</span></span><br><span class="line"><span class="comment">//   name: &#x27;houfei&#x27;,</span></span><br><span class="line"><span class="comment">//   age: 25,</span></span><br><span class="line"><span class="comment">//   gender: &#x27;male&#x27;,</span></span><br><span class="line"><span class="comment">//   address: &#x27;河北&#x27;</span></span><br><span class="line"><span class="comment">// &#125;, err =&gt; &#123;</span></span><br><span class="line"><span class="comment">//   if(!err) console.log(&#x27;插入成功&#x27;)</span></span><br><span class="line"><span class="comment">//   else console.log(&#x27;插入失败&#x27;)</span></span><br><span class="line"><span class="comment">// &#125;)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Model-的-API"><a href="#Model-的-API" class="headerlink" title="Model 的 API"></a>Model 的 API</h3><p><strong>document 是 model 的实例</strong></p>
+<h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// StuModel.create(object1, object2, ..., (err, object1, object2, ...) = &gt; &#123; &#125;)</span></span><br><span class="line"><span class="comment">// StuModel.create(array, (err, array) = &gt; &#123; &#125;)</span></span><br><span class="line"><span class="title class_">StuModel</span>.<span class="title function_">create</span>(</span><br><span class="line">  [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;liming&#x27;</span>,</span><br><span class="line">      <span class="attr">age</span>: <span class="number">23</span>,</span><br><span class="line">      <span class="attr">gender</span>: <span class="string">&#x27;male&#x27;</span>,</span><br><span class="line">      <span class="attr">address</span>: <span class="string">&#x27;安徽&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="function">(<span class="params">err, array</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(array);</span><br><span class="line">    <span class="keyword">if</span> (!err) <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;插入成功&#x27;</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;插入失败&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * filter 查询条件</span></span><br><span class="line"><span class="comment"> * projection 投影</span></span><br><span class="line"><span class="comment"> * options 查询选项 skip limit</span></span><br><span class="line"><span class="comment"> * callback 回调函数</span></span><br><span class="line"><span class="comment">  Model.find(filter, [projection], [options], [callback])</span></span><br><span class="line"><span class="comment">  Model.findById()</span></span><br><span class="line"><span class="comment">  Model.findByIdAndDelete()</span></span><br><span class="line"><span class="comment">  Model.findByIdAndRemove()</span></span><br><span class="line"><span class="comment">  Model.findByIdAndUpdate()</span></span><br><span class="line"><span class="comment">  Model.findOne()</span></span><br><span class="line"><span class="comment">  Model.findOneAndDelete()</span></span><br><span class="line"><span class="comment">  Model.findOneAndRemove()</span></span><br><span class="line"><span class="comment">  Model.findOneAndReplace()</span></span><br><span class="line"><span class="comment">  Model.findOneAndUpdate()</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 StuModel 查询 name 为 jack，并且 age 大于 22的所有array文档，并且只显示 name age 属性，不显示 _id 属性， array并且要跳过 skip 第一条数据</span></span><br><span class="line"><span class="title class_">StuModel</span>.<span class="title function_">find</span>(&#123; <span class="attr">name</span>: <span class="string">&#x27;jack&#x27;</span>, <span class="attr">age</span>: &#123; <span class="attr">$gte</span>: <span class="number">22</span> &#125; &#125;, <span class="string">&#x27;name age -_id&#x27;</span>, &#123; <span class="attr">skip</span>: <span class="number">1</span> &#125;, <span class="function">(<span class="params">err, docs</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(docs);</span><br><span class="line">  <span class="keyword">if</span> (!err) <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;查询成功&#x27;</span>);</span><br><span class="line">  <span class="keyword">else</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;查询失败&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">StuModel</span>.<span class="title function_">findOne</span>(&#123; <span class="attr">age</span>: &#123; <span class="attr">$gte</span>: <span class="number">19</span> &#125; &#125;, <span class="string">&#x27;name age -_id&#x27;</span>, &#123;&#125;, <span class="function">(<span class="params">err, doc</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(doc);</span><br><span class="line">  <span class="keyword">if</span> (!err) <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;查询成功&#x27;</span>);</span><br><span class="line">  <span class="keyword">else</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;查询失败&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">StuModel</span>.<span class="title function_">findById</span>(<span class="string">&#x27;5ee9f47cf67607ea5eda6894&#x27;</span>, <span class="string">&#x27;name&#x27;</span>, &#123;&#125;, <span class="function">(<span class="params">err, doc</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(doc <span class="keyword">instanceof</span> <span class="title class_">StuModel</span>);</span><br><span class="line">  <span class="keyword">if</span> (!err) <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;查询成功&#x27;</span>);</span><br><span class="line">  <span class="keyword">else</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;查询失败&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Model.updateMany(filter, doc, [options], [callback])</span></span><br><span class="line"><span class="comment">Model.updateOne(filter, doc, [options], [callback])</span></span><br><span class="line"><span class="comment">Model.replaceOne(filter, doc, [options], [callback])</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">StuModel</span>.<span class="title function_">updateOne</span>(</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">&#x27;houfei&#x27;</span> &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">$set</span>: &#123;</span><br><span class="line">      <span class="attr">age</span>: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123; <span class="attr">multi</span>: <span class="literal">false</span> &#125;,</span><br><span class="line">  <span class="function">(<span class="params">err, status</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(status);</span><br><span class="line">    <span class="keyword">if</span> (!err) <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;修改成功&#x27;</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;修改失败&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Model.deleteMany(conditions, [options], [callback])</span></span><br><span class="line"><span class="comment">Model.deleteOne(conditions, [options], [callback])</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">StuModel</span>.<span class="title function_">deleteOne</span>(&#123; <span class="attr">name</span>: <span class="string">&#x27;houfei&#x27;</span> &#125;, <span class="function">(<span class="params">err, state</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(state);</span><br><span class="line">  <span class="keyword">if</span> (!err) <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;删除成功&#x27;</span>);</span><br><span class="line">  <span class="keyword">else</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;删除失败&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Document-的-API"><a href="#Document-的-API" class="headerlink" title="Document 的 API"></a>Document 的 API</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建 Document 对象</span></span><br><span class="line"><span class="keyword">let</span> stu = <span class="keyword">new</span> <span class="title class_">StuModel</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;李白&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">30</span>,</span><br><span class="line">  <span class="attr">gender</span>: <span class="string">&#x27;female&#x27;</span>,</span><br><span class="line">  <span class="attr">address</span>: <span class="string">&#x27;四川&#x27;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="doc-save"><a href="#doc-save" class="headerlink" title="doc.save()"></a><a target="_blank" rel="noopener" href="https://mongoosejs.com/docs/api/document.html#document_Document-save">doc.save()</a></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 保存方法 save</span></span><br><span class="line">stu.<span class="title function_">save</span>(<span class="function">(<span class="params">err, state</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(state);</span><br><span class="line">  <span class="keyword">if</span> (!err) <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;添加成功&#x27;</span>);</span><br><span class="line">  <span class="keyword">else</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;添加失败&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="doc-update"><a href="#doc-update" class="headerlink" title="doc.update()"></a><a target="_blank" rel="noopener" href="https://mongoosejs.com/docs/api/document.html#document_Document-update">doc.update()</a></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">StuModel</span>.<span class="title function_">findOne</span>(&#123;&#125;, <span class="function">(<span class="params">error, doc</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Document.prototype.update(doc, options, callback)</span></span><br><span class="line"><span class="comment">   * doc «Object»</span></span><br><span class="line"><span class="comment">   * options «Object»</span></span><br><span class="line"><span class="comment">   * callback «Function»</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  doc.<span class="title function_">update</span>(</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">$set</span>: &#123;</span><br><span class="line">        <span class="attr">age</span>: <span class="number">1</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function">(<span class="params">err, status</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(status);</span><br><span class="line">      <span class="keyword">if</span> (!err) <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;修改成功&#x27;</span>);</span><br><span class="line">      <span class="keyword">else</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;修改失败&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="doc-get-set-id"><a href="#doc-get-set-id" class="headerlink" title="doc.get()|.set()|id"></a><a target="_blank" rel="noopener" href="https://mongoosejs.com/docs/api/document.html#document_Document-get">doc.get()|.set()|id</a></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">StuModel</span>.<span class="title function_">findOne</span>(&#123;&#125;, <span class="function">(<span class="params">error, doc</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(doc.<span class="property">id</span>);</span><br><span class="line">  doc.<span class="title function_">get</span>(<span class="string">&#x27;address&#x27;</span>, <span class="title class_">String</span>);</span><br><span class="line">  doc.<span class="title function_">set</span>(<span class="string">&#x27;age&#x27;</span>, <span class="number">99</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="doc-toJSON-toObject"><a href="#doc-toJSON-toObject" class="headerlink" title="doc.toJSON()|toObject"></a><a target="_blank" rel="noopener" href="https://mongoosejs.com/docs/api/document.html#document_Document-toJSON">doc.toJSON()|toObject</a></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">StuModel</span>.<span class="title function_">findOne</span>(&#123;&#125;, <span class="function">(<span class="params">error, doc</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> a = doc.<span class="title function_">toJSON</span>();</span><br><span class="line">  <span class="keyword">let</span> b = doc.<span class="title function_">toObject</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a, b);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Mongoose-模块化"><a href="#Mongoose-模块化" class="headerlink" title="Mongoose 模块化"></a>Mongoose 模块化</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Lb411V7rv?p=19"> 视频地址</a></p>
+<h3 id="拓展甘特图"><a href="#拓展甘特图" class="headerlink" title="拓展甘特图"></a>拓展甘特图</h3><p><a target="_blank" rel="noopener" href="https://mermaid-js.github.io/mermaid/#/README">GitHub guide</a></p>
+<h4 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a><a target="_blank" rel="noopener" href="https://mermaid-js.github.io/mermaid/#/README?id=flowchart">流程图</a></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">    A--&gt;B;</span><br><span class="line">    A--&gt;C;</span><br><span class="line">    B--&gt;D;</span><br><span class="line">    C--&gt;D;</span><br></pre></td></tr></table></figure>
+
+<h4 id="顺序图"><a href="#顺序图" class="headerlink" title="顺序图"></a><a target="_blank" rel="noopener" href="https://mermaid-js.github.io/mermaid/#/README?id=sequence-diagram">顺序图</a></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    participant Alice</span><br><span class="line">    participant Bob</span><br><span class="line">    Alice-&gt;&gt;John: Hello John, how are you?</span><br><span class="line">    loop Healthcheck</span><br><span class="line">        John-&gt;&gt;John: Fight against hypochondria</span><br><span class="line">    end</span><br><span class="line">    Note right of John: Rational thoughts &lt;br/&gt;prevail!</span><br><span class="line">    John--&gt;&gt;Alice: Great!</span><br><span class="line">    John-&gt;&gt;Bob: How about you?</span><br><span class="line">    Bob--&gt;&gt;John: Jolly good!</span><br></pre></td></tr></table></figure>
+
+<h4 id="甘特图"><a href="#甘特图" class="headerlink" title="甘特图"></a><a target="_blank" rel="noopener" href="https://mermaid-js.github.io/mermaid/#/README?id=gantt-diagram">甘特图</a></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">gantt</span><br><span class="line">dateFormat  YYYY-MM-DD</span><br><span class="line">title Adding GANTT diagram to mermaid</span><br><span class="line">excludes weekdays 2014-01-10</span><br><span class="line"></span><br><span class="line">section A section</span><br><span class="line">Completed task            :done,    des1, 2014-01-06,2014-01-08</span><br><span class="line">Active task               :active,  des2, 2014-01-09, 3d</span><br><span class="line">Future task               :         des3, after des2, 5d</span><br><span class="line">Future task2               :         des4, after des3, 5d</span><br></pre></td></tr></table></figure>
+
+<h4 id="其他一"><a href="#其他一" class="headerlink" title="其他一"></a>其他一</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">    A(开始) --&gt;B(起床)</span><br><span class="line">    B --天气不好--- C&gt;干活]</span><br><span class="line">    C ==&gt; D&#123;休息时间到了&#125;</span><br><span class="line">    D -.yes.-&gt; E((休息))</span><br><span class="line">    D -.no.-&gt; C</span><br><span class="line">    E --&gt; F(吃饭)</span><br></pre></td></tr></table></figure>
+
+<h4 id="其他二"><a href="#其他二" class="headerlink" title="其他二"></a>其他二</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">对象A-&gt;&gt;对象B:中午吃什么？</span><br><span class="line">对象B-&gt;&gt;对象A: 随便</span><br><span class="line">loop 思考</span><br><span class="line">    对象A-&gt;对象A: 努力搜索</span><br><span class="line">end</span><br><span class="line">对象A--&gt;&gt;对象B: 火锅？</span><br><span class="line">对象B-&gt;&gt;对象A: 可以</span><br><span class="line">Note left of 对象A: 我是一个对象A</span><br><span class="line">Note right of 对象B: 我是一个对象B</span><br><span class="line">participant 对象C</span><br><span class="line">Note over 对象C: 我自己说了算</span><br></pre></td></tr></table></figure>
+
+<h4 id="其他三"><a href="#其他三" class="headerlink" title="其他三"></a>其他三</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">gantt</span><br><span class="line">        dateFormat  YYYY-MM-DD</span><br><span class="line">        title 软件开发甘特图</span><br><span class="line">        section 设计</span><br><span class="line">        需求:done,des1, 2019-01-06,2019-01-08</span><br><span class="line">        原型:active,des2, 2019-01-09, 3d</span><br><span class="line">        UI设计:des3, after des2, 5d</span><br><span class="line">        未来任务:des4, after des3, 5d</span><br><span class="line"></span><br><span class="line">        section 开发</span><br><span class="line">        学习准备理解需求:crit, done, 2019-01-06,24h</span><br><span class="line">        设计框架:crit, done, after des2, 2d</span><br><span class="line">        开发:crit, active, 3d</span><br><span class="line">        未来任务:crit, 5d</span><br><span class="line">        休息时间:2d</span><br><span class="line"></span><br><span class="line">        section 测试</span><br><span class="line">        功能测试:active, a1, after des3, 3d</span><br><span class="line">        压力测试:after a1, 20h</span><br><span class="line">        测试报告: 48h</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/e61ae078.html" rel="next" title="RN基础入门">
+                <i class="fa fa-chevron-left"></i> RN基础入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/6316.html" rel="prev" title="WXMiniProgram">
+                WXMiniProgram <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7Carchive">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E5%8F%B0%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92"><span class="nav-number">1.</span> <span class="nav-text">后台与数据库交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mongoose"><span class="nav-number">2.</span> <span class="nav-text">Mongoose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mongoose-%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.1.</span> <span class="nav-text">mongoose 连接数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-%E7%9A%84-API"><span class="nav-number">2.2.</span> <span class="nav-text">Model 的 API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5"><span class="nav-number">2.2.1.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">2.2.2.</span> <span class="nav-text">查询数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="nav-number">2.2.3.</span> <span class="nav-text">更新数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">2.2.4.</span> <span class="nav-text">删除数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Document-%E7%9A%84-API"><span class="nav-number">2.3.</span> <span class="nav-text">Document 的 API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#doc-save"><span class="nav-number">2.3.1.</span> <span class="nav-text">doc.save()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#doc-update"><span class="nav-number">2.3.2.</span> <span class="nav-text">doc.update()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#doc-get-set-id"><span class="nav-number">2.3.3.</span> <span class="nav-text">doc.get()|.set()|id</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#doc-toJSON-toObject"><span class="nav-number">2.3.4.</span> <span class="nav-text">doc.toJSON()|toObject</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mongoose-%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="nav-number">2.4.</span> <span class="nav-text">Mongoose 模块化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E7%94%98%E7%89%B9%E5%9B%BE"><span class="nav-number">2.5.</span> <span class="nav-text">拓展甘特图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-number">2.5.1.</span> <span class="nav-text">流程图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E5%9B%BE"><span class="nav-number">2.5.2.</span> <span class="nav-text">顺序图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%98%E7%89%B9%E5%9B%BE"><span class="nav-number">2.5.3.</span> <span class="nav-text">甘特图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E4%B8%80"><span class="nav-number">2.5.4.</span> <span class="nav-text">其他一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E4%BA%8C"><span class="nav-number">2.5.5.</span> <span class="nav-text">其他二</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E4%B8%89"><span class="nav-number">2.5.6.</span> <span class="nav-text">其他三</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">heinfy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'CHXFaXIYKCfTPne1Qz1s0qra-gzGzoHsz',
+        appKey: '1tYSQQsYUaRxhDHMo1ujDwb1',
+        placeholder: '(ヾﾉ≧∀≦)o来啊，老铁，快活啊!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

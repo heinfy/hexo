@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="vue.js," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="日历组件效果 忙活了大概三天，做出来非常开心，心里美滋滋的 其实很早就想自己写一个日历组件了，只怪自己懒散 现在写一下思路过程，记录一下   需求1、实现一个日历组件，如图：  2、显示某天的事项：  3、事项是模拟父组件请求接口返回的，数据格式如下： 12345678910111213141516171819202122[  &amp;#123;    id: &amp;#x27;232&amp;#x27;,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日历组件">
+<meta property="og:url" content="http://example.com/posts/3b43e344.html">
+<meta property="og:site_name" content="heinfy&#39;s Blog">
+<meta property="og:description" content="日历组件效果 忙活了大概三天，做出来非常开心，心里美滋滋的 其实很早就想自己写一个日历组件了，只怪自己懒散 现在写一下思路过程，记录一下   需求1、实现一个日历组件，如图：  2、显示某天的事项：  3、事项是模拟父组件请求接口返回的，数据格式如下： 12345678910111213141516171819202122[  &amp;#123;    id: &amp;#x27;232&amp;#x27;,">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/posts/3b43e344/calendar.gif">
+<meta property="og:image" content="http://example.com/posts/3b43e344/20190606223710.png">
+<meta property="og:image" content="http://example.com/posts/3b43e344/1559832421561.png">
+<meta property="og:image" content="http://example.com/posts/3b43e344/2019-06-06_22-54-19.png">
+<meta property="article:published_time" content="2019-06-06T16:23:20.000Z">
+<meta property="article:modified_time" content="2022-03-07T14:50:02.964Z">
+<meta property="article:author" content="heinfy">
+<meta property="article:tag" content="vue.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/posts/3b43e344/calendar.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/posts/3b43e344.html"/>
+
+
+
+
+
+  <title>日历组件 | heinfy's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">heinfy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">写我所想</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a target="_blank" href="https://github.com/heinfy" rel="section noopener">
+            
+              <i class="menu-item-icon fa fa-fw fa-github"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th-list"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-note">
+          <a target="_blank" href="https://www.cnblogs.com/houfee/" rel="section noopener">
+            
+              <i class="menu-item-icon fa fa-fw fa-sticky-note-o"></i> <br />
+            
+            note
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/3b43e344.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="heinfy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">日历组件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-07T00:23:20+08:00">
+                2019-06-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-03-07T22:50:02+08:00">
+                2022-03-07
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue-js/" itemprop="url" rel="index">
+                    <span itemprop="name">vue.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/3b43e344.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/3b43e344.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <span id="more"></span>
+
+<h1 id="日历组件"><a href="#日历组件" class="headerlink" title="日历组件"></a>日历组件</h1><h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><blockquote>
+<p>忙活了大概三天，做出来非常开心，心里美滋滋的</p>
+<p>其实很早就想自己写一个日历组件了，只怪自己懒散</p>
+<p>现在写一下思路过程，记录一下</p>
+</blockquote>
+<p><img src="/posts/3b43e344/calendar.gif" alt="calendar"></p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>1、实现一个日历组件，如图：</p>
+<p><img src="/posts/3b43e344/20190606223710.png" alt="20190606223710"></p>
+<p>2、显示某天的事项：</p>
+<p><img src="/posts/3b43e344/1559832421561.png" alt="1559832421561"></p>
+<p>3、事项是模拟父组件请求接口返回的，数据格式如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;232&#x27;</span>,</span><br><span class="line">    <span class="attr">date</span>: <span class="string">&#x27;2019-06-01&#x27;</span>,</span><br><span class="line">    <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;292&#x27;</span>,</span><br><span class="line">    <span class="attr">date</span>: <span class="string">&#x27;2019-06-06&#x27;</span>,</span><br><span class="line">    <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;292&#x27;</span>,</span><br><span class="line">    <span class="attr">date</span>: <span class="string">&#x27;2019-06-07&#x27;</span>,</span><br><span class="line">    <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;369&#x27;</span>,</span><br><span class="line">    <span class="attr">date</span>: <span class="string">&#x27;2019-06-30&#x27;</span>,</span><br><span class="line">    <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>4、把事项添加到日历组件中，数据格式如下：</p>
+<p><img src="/posts/3b43e344/2019-06-06_22-54-19.png" alt="2019-06-06_22-54-19"></p>
+<h2 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h2><p><strong>package.json 文件：</strong></p>
+<p>父组件页面：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;test-container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Test页面，测试组件<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 日历 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">calendar</span> <span class="attr">v-if</span>=<span class="string">&quot;calendarVisible&quot;</span> @<span class="attr">getDateInfo</span>=<span class="string">&quot;getDateInfo&quot;</span> <span class="attr">:propsInfoList</span>=<span class="string">&quot;propsInfoList&quot;</span> <span class="attr">:propsTime</span>=<span class="string">&quot;propsTime&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">calendar</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">import</span> calendar <span class="keyword">from</span> <span class="string">&#x27;@/components/Calendar/Calendar.vue&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">name</span>: <span class="string">&#x27;test&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">components</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">calendar</span>: calendar</span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">data</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">calendarVisible</span>: <span class="literal">true</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">propsTime</span>: <span class="string">&#x27;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">propsInfoList</span>: <span class="string">&#x27;&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">middle</span>: [</span></span><br><span class="line"><span class="language-javascript">          &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">id</span>: <span class="string">&#x27;232&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">date</span>: <span class="string">&#x27;2019-06-01&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span></span><br><span class="line"><span class="language-javascript">          &#125;,</span></span><br><span class="line"><span class="language-javascript">          &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">id</span>: <span class="string">&#x27;292&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">date</span>: <span class="string">&#x27;2019-06-06&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span></span><br><span class="line"><span class="language-javascript">          &#125;,</span></span><br><span class="line"><span class="language-javascript">          &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">id</span>: <span class="string">&#x27;292&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">date</span>: <span class="string">&#x27;2019-06-07&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span></span><br><span class="line"><span class="language-javascript">          &#125;,</span></span><br><span class="line"><span class="language-javascript">          &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">id</span>: <span class="string">&#x27;369&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">date</span>: <span class="string">&#x27;2019-06-30&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">info</span>: <span class="string">&#x27;我要去吃大餐&#x27;</span></span></span><br><span class="line"><span class="language-javascript">          &#125;</span></span><br><span class="line"><span class="language-javascript">        ]</span></span><br><span class="line"><span class="language-javascript">      &#125;;</span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">created</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// 模拟首屏ajax请求，将当月数据传入组件中</span></span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">this</span>.<span class="property">propsInfoList</span> = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(<span class="variable language_">this</span>.<span class="property">middle</span>);</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">this</span>.<span class="property">propsTime</span> = <span class="variable language_">this</span>.<span class="title function_">getToday</span>();</span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">window</span>.<span class="title function_">alert</span>(<span class="string">&#x27;测试时间为19年 5、6、7月，完成是在6月&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">methods</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// 格式化当前日期 YYYY-MM-DD</span></span></span><br><span class="line"><span class="language-javascript">      <span class="title function_">getToday</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">let</span> nowDate = <span class="keyword">new</span> <span class="title class_">Date</span>();</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">let</span> yy = nowDate.<span class="title function_">getFullYear</span>().<span class="title function_">toString</span>();</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">let</span> mm = (nowDate.<span class="title function_">getMonth</span>() + <span class="number">1</span> + <span class="string">&#x27;&#x27;</span>).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">let</span> dd = (nowDate.<span class="title function_">getDate</span>() + <span class="string">&#x27;&#x27;</span>).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// let hh = nowDate.getHours().toString().padStart(2,&#x27;0&#x27;)</span></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// let mt = (nowDate.getMinutes() + &#x27;&#x27;).padStart(2,&#x27;0&#x27;)</span></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// let ss = (nowDate.getSeconds() + &#x27;&#x27;).padStart(2,&#x27;0&#x27;)</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;yy&#125;</span>-<span class="subst">$&#123;mm&#125;</span>-<span class="subst">$&#123;dd&#125;</span>`</span>; <span class="comment">// -$&#123;hh&#125;-$&#123;mt&#125;-$&#123;ss&#125;</span></span></span><br><span class="line"><span class="language-javascript">      &#125;,</span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// 组件传值</span></span></span><br><span class="line"><span class="language-javascript">      <span class="title function_">getDateInfo</span>(<span class="params">year, month</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">let</span> _this = <span class="variable language_">this</span>;</span></span><br><span class="line"><span class="language-javascript">        _this.<span class="property">propsTime</span> = <span class="string">`<span class="subst">$&#123;year&#125;</span>-<span class="subst">$&#123;month&#125;</span>`</span>;</span></span><br><span class="line"><span class="language-javascript">        _this.<span class="property">calendarVisible</span> = <span class="literal">false</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 模拟点击选取其他年月的ajax，假数据，只能显示19年 5 6 7三个月</span></span></span><br><span class="line"><span class="language-javascript">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">          _this.<span class="property">propsInfoList</span> = [];</span></span><br><span class="line"><span class="language-javascript">          <span class="keyword">let</span> middle;</span></span><br><span class="line"><span class="language-javascript">          <span class="keyword">if</span> (month == <span class="string">&#x27;05&#x27;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            middle = [</span></span><br><span class="line"><span class="language-javascript">              &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">id</span>: <span class="string">&#x27;232&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">date</span>: <span class="string">&#x27;2019-05-10&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">info</span>: <span class="string">&#x27;我要去吃小餐&#x27;</span></span></span><br><span class="line"><span class="language-javascript">              &#125;</span></span><br><span class="line"><span class="language-javascript">            ];</span></span><br><span class="line"><span class="language-javascript">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (month == <span class="string">&#x27;06&#x27;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            middle = _this.<span class="property">middle</span>;</span></span><br><span class="line"><span class="language-javascript">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (month == <span class="string">&#x27;07&#x27;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            middle = [</span></span><br><span class="line"><span class="language-javascript">              &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">id</span>: <span class="string">&#x27;232&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">date</span>: <span class="string">&#x27;2019-07-10&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">info</span>: <span class="string">&#x27;我要去吃小餐&#x27;</span></span></span><br><span class="line"><span class="language-javascript">              &#125;</span></span><br><span class="line"><span class="language-javascript">            ];</span></span><br><span class="line"><span class="language-javascript">          &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            middle = <span class="string">&#x27;&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">          &#125;</span></span><br><span class="line"><span class="language-javascript">          _this.<span class="property">propsInfoList</span> = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(middle);</span></span><br><span class="line"><span class="language-javascript">          _this.<span class="property">calendarVisible</span> = <span class="literal">true</span>;</span></span><br><span class="line"><span class="language-javascript">        &#125;, <span class="number">100</span>);</span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">  &#125;;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>日历子组件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;calendar-container&quot;</span>&gt;</span></span><br><span class="line">    // 日历标题</span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>calendar<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    // 显示本月日期 2019-6，可点击</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;show-date&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;clickData&quot;</span>&gt;</span>&#123;&#123;showDate&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    // 今天的日期 2019-6-6</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;now-time&quot;</span>&gt;</span>今日：&#123;&#123;exactTime&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    // 日历组件</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;calendar&quot;</span>&gt;</span></span><br><span class="line">      // 日历组件头部</span><br><span class="line">      <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;calendar-header&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>日<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>一<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>二<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>三<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>四<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>五<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>六<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">      // 日历组件主体</span><br><span class="line">      <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;calendar-body&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;calendar-row&quot;</span> <span class="attr">v-for</span>=<span class="string">&quot;(item, index) in JSON.parse(calendarData)&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;index&quot;</span>&gt;</span></span><br><span class="line">          // 注意给 不同的日子加类名 // 周末：weekend 工作日：weekday // 过去的事项 already-time 今天的事项 exact-time 将来的事项 soon-time // 给有事项的日子实现点击弹框，显示这天的事项内容</span><br><span class="line">          <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-for</span>=<span class="string">&quot;(subItem, subIndex) in item&quot;</span> <span class="attr">:class</span>=<span class="string">&quot;[subIndex == 0 || subIndex == 6? &#x27;weekend&#x27;: &#x27;weekday&#x27;, subItem.type == &#x27;1&#x27;? &#x27;exact-time&#x27;: &#x27;&#x27;, subItem.type == &#x27;0&#x27;? &#x27;already-time&#x27;: &#x27;&#x27;, subItem.type == &#x27;2&#x27;? &#x27;soon-time&#x27;: &#x27;&#x27;]&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;showInfo(subItem)&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;subIndex&quot;</span>&gt;</span>&#123;&#123;subItem.date&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    // popup 和 picker 搭配，实现 年月 选择 mint-ui 库</span><br><span class="line">    <span class="tag">&lt;<span class="name">mt-popup</span> <span class="attr">v-model</span>=<span class="string">&quot;popupVisible&quot;</span> <span class="attr">position</span>=<span class="string">&quot;bottom&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">mt-picker</span> <span class="attr">:slots</span>=<span class="string">&quot;slots&quot;</span> <span class="attr">:showToolbar</span>=<span class="string">&quot;true&quot;</span> <span class="attr">:visibleItemCount</span>=<span class="string">&quot;5&quot;</span> <span class="attr">:itemHeight</span>=<span class="string">&quot;itemsHeight&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;picker&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;@/assets/images/picker_cancel.png&quot;</span> <span class="attr">class</span>=<span class="string">&quot;picker_cancel&quot;</span> <span class="attr">v-on:click</span>=<span class="string">&quot;cancelFunc()&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;@/assets/images/picker_sure.png&quot;</span> <span class="attr">class</span>=<span class="string">&quot;picker_sure&quot;</span> <span class="attr">v-on:click</span>=<span class="string">&quot;sureFunc()&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">mt-picker</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mt-popup</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>日历子组件逻辑：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">MessageBox</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;mint-ui&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;calendar&#x27;</span>,</span><br><span class="line">  <span class="attr">props</span>: &#123;</span><br><span class="line">    <span class="attr">propsTime</span>: <span class="title class_">String</span>,</span><br><span class="line">    <span class="attr">propsInfoList</span>: <span class="title class_">String</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">// 接收父组件传值 &#x27;2019-06&#x27;</span></span><br><span class="line">      <span class="attr">time</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      <span class="comment">// 接收父组件数据列表</span></span><br><span class="line">      <span class="attr">infoList</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      <span class="comment">// 日历组件</span></span><br><span class="line">      <span class="attr">calendarData</span>: [],</span><br><span class="line">      <span class="comment">// 页面展示的 &#x27;年-月&#x27;</span></span><br><span class="line">      <span class="attr">showDate</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      <span class="comment">// 当前的 &#x27;年-月-日&#x27;</span></span><br><span class="line">      <span class="attr">exactTime</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      <span class="comment">// picker 高度</span></span><br><span class="line">      <span class="attr">itemsHeight</span>: (<span class="number">95</span> * <span class="variable language_">window</span>.<span class="property">screen</span>.<span class="property">height</span>) / <span class="number">1334</span>,</span><br><span class="line">      <span class="comment">// pupop 显示</span></span><br><span class="line">      <span class="attr">popupVisible</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="comment">// picker 数据</span></span><br><span class="line">      <span class="attr">slots</span>: []</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">created</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 拿到父组件的 list</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">infoList</span> = <span class="variable language_">this</span>.<span class="property">propsInfoList</span>;</span><br><span class="line">    <span class="comment">// 拿到父组件的 &#x27;2019-06&#x27;</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">time</span> = <span class="variable language_">this</span>.<span class="property">propsTime</span>.<span class="title function_">split</span>(<span class="string">&#x27;-&#x27;</span>);</span><br><span class="line">    <span class="comment">// 获取今天 &#x27;2019-06-06&#x27;</span></span><br><span class="line">    <span class="keyword">const</span> date = <span class="variable language_">this</span>.<span class="title function_">getToday</span>();</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">exactTime</span> = date.<span class="title function_">slice</span>(<span class="number">0</span>, <span class="number">3</span>).<span class="title function_">join</span>(<span class="string">&#x27;-&#x27;</span>);</span><br><span class="line">    <span class="comment">// 日历组件</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">getCalendar</span>(...<span class="variable language_">this</span>.<span class="property">time</span>);</span><br><span class="line">    <span class="comment">// 组装 picker 数组</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">getSlotsArray</span>(...date.<span class="title function_">slice</span>(<span class="number">0</span>, <span class="number">2</span>));</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    <span class="comment">// 日历组件</span></span><br><span class="line">    <span class="title function_">getCalendar</span>(<span class="params">year, month</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> _this = <span class="variable language_">this</span>;</span><br><span class="line">      <span class="comment">// 转存当天 &#x27;2019-06-06&#x27;</span></span><br><span class="line">      <span class="keyword">const</span> rightNow = _this.<span class="property">exactTime</span>;</span><br><span class="line">      <span class="comment">// 拼接 显示日历上的年月 &#x27;2019-05&#x27;</span></span><br><span class="line">      _this.<span class="property">showDate</span> = <span class="string">`<span class="subst">$&#123;year&#125;</span>-<span class="subst">$&#123;month&#125;</span>`</span>;</span><br><span class="line">      <span class="comment">// 获取当月的第一天</span></span><br><span class="line">      <span class="keyword">const</span> firstDate = <span class="keyword">new</span> <span class="title class_">Date</span>(year, month - <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">      <span class="comment">// 获取第一天周几</span></span><br><span class="line">      <span class="keyword">const</span> firstDay = firstDate.<span class="title function_">getDay</span>();</span><br><span class="line">      <span class="comment">// 判断是否为闰年</span></span><br><span class="line">      <span class="keyword">const</span> isLeapYear = year % <span class="number">100</span> == <span class="number">0</span> ? (year % <span class="number">400</span> == <span class="number">0</span> ? <span class="number">1</span> : <span class="number">0</span>) : year % <span class="number">4</span> == <span class="number">0</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">      <span class="comment">// 获取今年每个月的天数</span></span><br><span class="line">      <span class="keyword">const</span> monthArray = [<span class="number">31</span>, <span class="number">28</span> + isLeapYear, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>];</span><br><span class="line">      <span class="comment">// 计算星期的行数</span></span><br><span class="line">      <span class="keyword">const</span> weeekLines = <span class="title class_">Math</span>.<span class="title function_">ceil</span>((monthArray[month - <span class="number">1</span>] + firstDay) / <span class="number">7</span>);</span><br><span class="line">      <span class="keyword">let</span> calendar = [];</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; weeekLines; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> weeekLinesInfo = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; <span class="number">7</span>; j++) &#123;</span><br><span class="line">          <span class="comment">// 计算每个单元格的序号</span></span><br><span class="line">          <span class="keyword">const</span> cellNo = i * <span class="number">7</span> + j;</span><br><span class="line">          <span class="comment">// 计算每个单元格应该填充的日期</span></span><br><span class="line">          <span class="keyword">const</span> datePerLine = cellNo - firstDay + <span class="number">1</span>;</span><br><span class="line">          <span class="comment">// 排除空白格</span></span><br><span class="line">          <span class="keyword">if</span> (datePerLine &lt;= <span class="number">0</span> || datePerLine &gt; monthArray[month - <span class="number">1</span>]) &#123;</span><br><span class="line">            <span class="comment">// 不存在的显示为 null 和 &#x27;&#x27;</span></span><br><span class="line">            <span class="keyword">let</span> outOfMonth = &#123;</span><br><span class="line">              <span class="attr">type</span>: <span class="string">&#x27;null&#x27;</span>,</span><br><span class="line">              <span class="attr">date</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">            &#125;;</span><br><span class="line">            weeekLinesInfo[j] = outOfMonth;</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> day = (datePerLine + <span class="string">&#x27;&#x27;</span>).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">            <span class="keyword">let</span> inOfMonth = &#123;</span><br><span class="line">              <span class="attr">type</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">              <span class="attr">date</span>: day,</span><br><span class="line">              <span class="attr">isDone</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">              <span class="attr">infor</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="comment">// 今天背景变成一个红圈,这是今天 =&gt; rightNow</span></span><br><span class="line">            <span class="keyword">const</span> propsDate = <span class="string">`<span class="subst">$&#123;year&#125;</span>-<span class="subst">$&#123;month&#125;</span>-<span class="subst">$&#123;day&#125;</span>`</span>;</span><br><span class="line">            <span class="comment">// 比较每月的今天</span></span><br><span class="line">            <span class="keyword">if</span> (propsDate == rightNow) &#123;</span><br><span class="line">              inOfMonth.<span class="property">type</span> = <span class="string">&#x27;1&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">const</span> reservations = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(_this.<span class="property">infoList</span>);</span><br><span class="line">            <span class="comment">// 将 父组件传的 list 赋值在日历上</span></span><br><span class="line">            <span class="comment">// 预定列表 和 当月每一天比较</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> k = <span class="number">0</span>; k &lt; reservations.<span class="property">length</span>; k++) &#123;</span><br><span class="line">              <span class="keyword">if</span> (propsDate == reservations[k].<span class="property">date</span>) &#123;</span><br><span class="line">                <span class="comment">// inOfMonth.type = &quot;1&quot;</span></span><br><span class="line">                inOfMonth.<span class="property">infor</span> = reservations[k].<span class="property">info</span>;</span><br><span class="line">                <span class="keyword">if</span> (rightNow == reservations[k].<span class="property">date</span>) &#123;</span><br><span class="line">                  inOfMonth.<span class="property">type</span> = <span class="string">&#x27;1&#x27;</span>;</span><br><span class="line">                  inOfMonth.<span class="property">isDone</span> = <span class="string">&#x27;doing&#x27;</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (rightNow &gt; reservations[k].<span class="property">date</span>) &#123;</span><br><span class="line">                  inOfMonth.<span class="property">type</span> = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                  inOfMonth.<span class="property">isDone</span> = <span class="string">&#x27;pass&#x27;</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (rightNow &lt; reservations[k].<span class="property">date</span>) &#123;</span><br><span class="line">                  inOfMonth.<span class="property">type</span> = <span class="string">&#x27;2&#x27;</span>;</span><br><span class="line">                  inOfMonth.<span class="property">isDone</span> = <span class="string">&#x27;will&#x27;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            weeekLinesInfo[j] = inOfMonth;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        calendar.<span class="title function_">push</span>(weeekLinesInfo);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="variable language_">window</span>.<span class="property">console</span>.<span class="title function_">log</span>(calendar);</span><br><span class="line">      <span class="comment">// 即将遍历二维数组</span></span><br><span class="line">      _this.<span class="property">calendarData</span> = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(calendar);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 格式化当前日期 YYYY-MM-DD</span></span><br><span class="line">    <span class="title function_">getToday</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> nowDate = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">      <span class="keyword">let</span> yy = nowDate.<span class="title function_">getFullYear</span>().<span class="title function_">toString</span>();</span><br><span class="line">      <span class="keyword">let</span> mm = (nowDate.<span class="title function_">getMonth</span>() + <span class="number">1</span> + <span class="string">&#x27;&#x27;</span>).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">      <span class="keyword">let</span> dd = (nowDate.<span class="title function_">getDate</span>() + <span class="string">&#x27;&#x27;</span>).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">      <span class="keyword">let</span> hh = nowDate.<span class="title function_">getHours</span>().<span class="title function_">toString</span>().<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">      <span class="keyword">let</span> mt = (nowDate.<span class="title function_">getMinutes</span>() + <span class="string">&#x27;&#x27;</span>).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">      <span class="keyword">let</span> ss = (nowDate.<span class="title function_">getSeconds</span>() + <span class="string">&#x27;&#x27;</span>).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">      <span class="keyword">return</span> [yy, mm, dd, hh, mt, ss];</span><br><span class="line">      <span class="comment">// return `$&#123;yy&#125;-$&#123;mm&#125;-$&#123;dd&#125;-$&#123;hh&#125;-$&#123;mt&#125;-$&#123;ss&#125;`</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 组装 picker 数组</span></span><br><span class="line">    <span class="title function_">getSlotsArray</span>(<span class="params">year, month</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> _this = <span class="variable language_">this</span>;</span><br><span class="line">      <span class="keyword">let</span> yearArray = [];</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> i = -<span class="number">10</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">        yearArray.<span class="title function_">push</span>(year - <span class="number">1</span> + i);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">let</span> monthArray = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>];</span><br><span class="line">      <span class="keyword">let</span> slots = [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">values</span>: yearArray,</span><br><span class="line">          <span class="attr">className</span>: <span class="string">&#x27;slot1&#x27;</span>,</span><br><span class="line">          <span class="attr">defaultIndex</span>: <span class="number">11</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">values</span>: monthArray,</span><br><span class="line">          <span class="attr">className</span>: <span class="string">&#x27;slot2&#x27;</span>,</span><br><span class="line">          <span class="attr">defaultIndex</span>: month - <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">      ];</span><br><span class="line">      _this.<span class="property">slots</span> = slots;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 显示日期弹窗</span></span><br><span class="line">    <span class="title function_">clickData</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">popupVisible</span> = <span class="literal">true</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 取消按钮</span></span><br><span class="line">    <span class="title function_">cancelFunc</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">popupVisible</span> = <span class="literal">false</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 确认按钮</span></span><br><span class="line">    <span class="title function_">sureFunc</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> _this = <span class="variable language_">this</span>;</span><br><span class="line">      _this.<span class="property">popupVisible</span> = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">const</span> clickData = _this.<span class="property">$refs</span>.<span class="property">picker</span>.<span class="title function_">getValues</span>();</span><br><span class="line">      <span class="keyword">const</span> year = clickData[<span class="number">0</span>] + <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">      <span class="keyword">const</span> month = (clickData[<span class="number">1</span>] + <span class="string">&#x27;&#x27;</span>).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">      <span class="keyword">const</span> day = _this.<span class="property">time</span>[<span class="number">2</span>];</span><br><span class="line">      _this.<span class="title function_">getDateInfo</span>(year, month);</span><br><span class="line">      _this.<span class="title function_">getCalendar</span>(year, month);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 调用父组件定义的方法</span></span><br><span class="line">    <span class="title function_">getDateInfo</span>(<span class="params">year, month</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.$emit(<span class="string">&#x27;getDateInfo&#x27;</span>, year, month);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 点击展示某天的事项信息</span></span><br><span class="line">    <span class="title function_">showInfo</span>(<span class="params">info</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> _this = <span class="variable language_">this</span>;</span><br><span class="line">      <span class="keyword">const</span> infor = info;</span><br><span class="line">      <span class="keyword">if</span> (infor.<span class="property">infor</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> [year, month] = _this.<span class="property">showDate</span>.<span class="title function_">split</span>(<span class="string">&#x27;-&#x27;</span>);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(year, month, info);</span><br><span class="line">        <span class="keyword">const</span> titleDate = <span class="string">`<span class="subst">$&#123;year&#125;</span>-<span class="subst">$&#123;month&#125;</span>-<span class="subst">$&#123;info.date&#125;</span>`</span>;</span><br><span class="line">        <span class="keyword">const</span> preview = info.<span class="property">infor</span>;</span><br><span class="line">        <span class="title class_">MessageBox</span>(&#123;</span><br><span class="line">          <span class="attr">title</span>: titleDate,</span><br><span class="line">          <span class="attr">message</span>: preview,</span><br><span class="line">          <span class="attr">showCancelButton</span>: <span class="literal">false</span>,</span><br><span class="line">          <span class="attr">closeOnClickModal</span>: <span class="literal">true</span></span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>其他：为了减少篇幅，省略样式</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/houfeii">github 地址</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue-js/" rel="tag"># vue.js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/12cd2a8e.html" rel="prev" title="XXS攻击">
+                XXS攻击 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7Carchive">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%8E%86%E7%BB%84%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">日历组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%88%E6%9E%9C"><span class="nav-number">1.1.</span> <span class="nav-text">效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E6%B1%82"><span class="nav-number">1.2.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="nav-number">1.3.</span> <span class="nav-text">代码解析</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">heinfy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'CHXFaXIYKCfTPne1Qz1s0qra-gzGzoHsz',
+        appKey: '1tYSQQsYUaRxhDHMo1ujDwb1',
+        placeholder: '(ヾﾉ≧∀≦)o来啊，老铁，快活啊!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

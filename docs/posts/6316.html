@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="微信小程序," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.开发准备 账号申请  选择注册账号类型 —— 小程序 账号信息 邮箱激活 信息登记   绑定开发者  登录小程序 管理员授权 添加成员   获取 AppID  设置——开发设置   开发工具  下载—扫码登录—选择小程序—创建小程序—预览模板界面   官方文档   2.结构分析以下是小程序的基本目录结构，也可以根据需要任意添加其它目录，如资源目录 assets、第三方库 vendors、扩">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WXMiniProgram">
+<meta property="og:url" content="http://example.com/posts/6316.html">
+<meta property="og:site_name" content="heinfy&#39;s Blog">
+<meta property="og:description" content="1.开发准备 账号申请  选择注册账号类型 —— 小程序 账号信息 邮箱激活 信息登记   绑定开发者  登录小程序 管理员授权 添加成员   获取 AppID  设置——开发设置   开发工具  下载—扫码登录—选择小程序—创建小程序—预览模板界面   官方文档   2.结构分析以下是小程序的基本目录结构，也可以根据需要任意添加其它目录，如资源目录 assets、第三方库 vendors、扩">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/posts/6316/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png">
+<meta property="article:published_time" content="2020-06-22T10:00:46.000Z">
+<meta property="article:modified_time" content="2022-03-07T14:51:29.905Z">
+<meta property="article:author" content="heinfy">
+<meta property="article:tag" content="微信小程序">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/posts/6316/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/posts/6316.html"/>
+
+
+
+
+
+  <title>WXMiniProgram | heinfy's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">heinfy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">写我所想</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a target="_blank" href="https://github.com/heinfy" rel="section noopener">
+            
+              <i class="menu-item-icon fa fa-fw fa-github"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th-list"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-note">
+          <a target="_blank" href="https://www.cnblogs.com/houfee/" rel="section noopener">
+            
+              <i class="menu-item-icon fa fa-fw fa-sticky-note-o"></i> <br />
+            
+            note
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/6316.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="heinfy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">WXMiniProgram</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-22T18:00:46+08:00">
+                2020-06-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-03-07T22:51:29+08:00">
+                2022-03-07
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BE%AE%E4%BF%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">微信</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/6316.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/6316.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <span id="more"></span>
+
+<h2 id="1-开发准备"><a href="#1-开发准备" class="headerlink" title="1.开发准备"></a>1.开发准备</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/cgi-bin/registermidpage?action=index&lang=zh_CN">账号申请</a></p>
+<ul>
+<li>选择注册账号类型 —— 小程序</li>
+<li>账号信息</li>
+<li>邮箱激活</li>
+<li>信息登记</li>
+</ul>
+</li>
+<li><p>绑定开发者</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/">登录小程序</a></li>
+<li>管理员授权</li>
+<li>添加成员</li>
+</ul>
+</li>
+<li><p>获取 AppID</p>
+<ul>
+<li>设置——开发设置</li>
+</ul>
+</li>
+<li><p>开发工具</p>
+<ul>
+<li>下载—扫码登录—选择小程序—创建小程序—预览模板界面</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/index.html?t=2018413">官方文档</a></p>
+</li>
+</ul>
+<h2 id="2-结构分析"><a href="#2-结构分析" class="headerlink" title="2.结构分析"></a>2.结构分析</h2><p>以下是小程序的基本目录结构，也可以根据需要任意添加其它目录，如资源目录 assets、第三方库 vendors、扩展目录 extends 等。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">├── app.js ...................小程序入口文件</span><br><span class="line">├── app.json .................小程序全局配置</span><br><span class="line">├── app.wxss .................小程序全局样式</span><br><span class="line">├── pages ....................所有页面目录</span><br><span class="line">│   ├── index ................index页面目录</span><br><span class="line">│   │   ├── index.js .........index页面业务逻辑</span><br><span class="line">│   │   ├── index.wxml .......index页面布局结构</span><br><span class="line">│   │   └── index.wxss .......index页面布局样式</span><br><span class="line">│   └── logs .................logs页目录</span><br><span class="line">│       ├── logs.js ..........logs页面业务逻辑</span><br><span class="line">│       ├── logs.json ........logs页面配置文件</span><br><span class="line">│       ├── logs.wxml ........logs页面布局结构</span><br><span class="line">│       └── logs.wxss ........logs页面布局样式</span><br><span class="line">├── project.config.json ......开发工具配置文件</span><br><span class="line">└── utils ....................公共逻辑</span><br><span class="line">    └── util.js ..............实用工具</span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;主体 app：一个小程序主体部分由三个文件组成，放在项目的根目录（如果项目使用 gulp 或者 webpack 打包，则需要在<code>project.config.js</code> 指定 <code>&quot;miniprogramRoot&quot;: &quot;路径“</code> 属性）&#x3D;&#x3D;</p>
+<h3 id="2-1-全局配置"><a href="#2-1-全局配置" class="headerlink" title="2.1 全局配置"></a>2.1 全局配置</h3><p>通过 app.json 文件对小程序进行全局配置，如页面文件的路径、窗口表现、设置网络超时时间、设置多 tab 等。</p>
+<p><strong>app.json 配置清单</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>必填</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pages</td>
+<td>String Array</td>
+<td>是</td>
+<td>设置页面路径</td>
+</tr>
+<tr>
+<td>window</td>
+<td>Object</td>
+<td>否</td>
+<td>设置默认窗口表现</td>
+</tr>
+<tr>
+<td>tabBar</td>
+<td>Object</td>
+<td>否</td>
+<td>设置底部 tab 表现</td>
+</tr>
+<tr>
+<td>networkTimeout</td>
+<td>Object</td>
+<td>否</td>
+<td>设置网络超时时间</td>
+</tr>
+<tr>
+<td>debug</td>
+<td>Boolean</td>
+<td>否</td>
+<td>设置是否开启调试模式</td>
+</tr>
+</tbody></table>
+<p>app.json 示例</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;pages&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;pages/index/index&quot;</span><span class="punctuation">,</span> <span class="string">&quot;pages/detail/index&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>window</strong></li>
+</ol>
+<p>对象类型，用于设置小程序的状态栏、导航条、标题、窗口背景色。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>默认值</th>
+<th>描述</th>
+<th>兼容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>navigationBarBackgroundColor</td>
+<td>HexColor</td>
+<td>#000000</td>
+<td>导航栏背景颜色，如”#000000”</td>
+<td>-</td>
+</tr>
+<tr>
+<td>navigationBarTextStyle</td>
+<td>String</td>
+<td>white</td>
+<td>导航栏标题颜色，仅支持 black&#x2F;white</td>
+<td></td>
+</tr>
+<tr>
+<td>navigationBarTitleText</td>
+<td>String</td>
+<td></td>
+<td>导航栏标题文字内容</td>
+<td></td>
+</tr>
+<tr>
+<td>backgroundColor</td>
+<td>HexColor</td>
+<td>#ffffff</td>
+<td>窗口的背景色</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>查看 window<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/config.html#window">更多配置</a>属性</p>
+<p>编辑 app.json，添加字段 windows</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;window&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;navigationBarBackgroundColor&quot;</span><span class="punctuation">:</span> <span class="string">&quot;#262626&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;navigationBarTitleText&quot;</span><span class="punctuation">:</span> <span class="string">&quot;XXX&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;navigationBarTextStyle&quot;</span><span class="punctuation">:</span> <span class="string">&quot;white&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;backgroundColor&quot;</span><span class="punctuation">:</span> <span class="string">&quot;#F0F0F0&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>tabBar</strong></li>
+</ol>
+<p>对象类型，配置项指定 tab 栏的表现，以及 tab 切换时显示的对应页面。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>color</td>
+<td>HexColor</td>
+<td>是</td>
+<td></td>
+<td>tab 上的文字默认颜色</td>
+</tr>
+<tr>
+<td>selectedColor</td>
+<td>HexColor</td>
+<td>是</td>
+<td></td>
+<td>tab 上的文字选中时的颜色</td>
+</tr>
+<tr>
+<td>backgroundColor</td>
+<td>HexColor</td>
+<td>是</td>
+<td></td>
+<td>tab 的背景色</td>
+</tr>
+<tr>
+<td>borderStyle</td>
+<td>String</td>
+<td>否</td>
+<td>black</td>
+<td>tabbar 上边框的颜色， 仅支持 black&#x2F;white</td>
+</tr>
+<tr>
+<td>list</td>
+<td>Array</td>
+<td>是</td>
+<td></td>
+<td>tab 的列表，最少 2 个、最多 5 个</td>
+</tr>
+<tr>
+<td>position</td>
+<td>String</td>
+<td>否</td>
+<td>bottom</td>
+<td>可选值 bottom、top</td>
+</tr>
+</tbody></table>
+<ol>
+<li>当设置 position 为 top 时，将不会显示 icon</li>
+<li>tabBar 中的 list 是一个数组，<strong>只能配置最少 2 个、最多 5 个 tab</strong>，tab 按数组的顺序排序。</li>
+</ol>
+<p>其中 list 接受一个数组，数组中的每个项都是一个对象，其属性值如下：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>必填</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pagePath</td>
+<td>String</td>
+<td>是</td>
+<td>页面路径，必须在 pages 中先定义</td>
+</tr>
+<tr>
+<td>text</td>
+<td>String</td>
+<td>是</td>
+<td>tab 上按钮文字</td>
+</tr>
+<tr>
+<td>iconPath</td>
+<td>String</td>
+<td>否</td>
+<td>图片路径，icon 大小限制为 40kb，建议尺寸为 81px * 81px，当 postion 为 top 时，此参数无效，不支持网络图片</td>
+</tr>
+<tr>
+<td>selectedIconPath</td>
+<td>String</td>
+<td>否</td>
+<td>选中时的图片路径，icon 大小限制为 40kb，建议尺寸为 81px * 81px ，当 postion 为 top 时，此参数无效</td>
+</tr>
+</tbody></table>
+<h3 id="2-2-页面配置"><a href="#2-2-页面配置" class="headerlink" title="2.2 页面配置"></a>2.2 页面配置</h3><blockquote>
+<p>每个页面可以有不同的表现，通过 pages 目录下的 .json 文件，如 logs.json ，实现页面的局部配置。</p>
+<p>但是只能设置 app.json 中的 window 配置项的内容，页面中配置项会覆盖 app.json 的 window 中相同的配置项。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>navigationBarBackgroundColor</td>
+<td>HexColor</td>
+<td>#000</td>
+<td>导航栏背景颜色</td>
+</tr>
+<tr>
+<td>navigationBarTextStyle</td>
+<td>String</td>
+<td>white</td>
+<td>导航栏标题颜色，仅支持 black&#x2F;white</td>
+</tr>
+<tr>
+<td>navigationBarTitleText</td>
+<td>String</td>
+<td></td>
+<td>导航栏标题文字内容</td>
+</tr>
+<tr>
+<td>backgroundColor</td>
+<td>HexColor</td>
+<td>#fff</td>
+<td>窗口的背景色</td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 在 pages/center 目录下创建 index.json</span><br><span class="line">FC/pages/center</span><br><span class="line">├── index.js</span><br><span class="line">├── index.json</span><br><span class="line">└── index.wxml</span><br></pre></td></tr></table></figure>
+
+<p>如下所示，编辑 index.json</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;navigationBarBackgroundColor&quot;</span><span class="punctuation">:</span> <span class="string">&quot;#ffffff&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;navigationBarTextStyle&quot;</span><span class="punctuation">:</span> <span class="string">&quot;white&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;navigationBarTitleText&quot;</span><span class="punctuation">:</span> <span class="string">&quot;我的&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-适配、样式和组件"><a href="#2-3-适配、样式和组件" class="headerlink" title="2.3 适配、样式和组件"></a>2.3 适配、样式和组件</h3><p><strong>一句话：开发小程序时所有屏幕宽度都是 750rpx。</strong></p>
+<p><strong>rpx（responsive pixel）可以根据屏幕宽度进行自适应。规定所有屏幕宽为 750rpx。</strong></p>
+<p>rpx 与 px 的换算关系：</p>
+<table>
+<thead>
+<tr>
+<th>设备</th>
+<th>屏幕尺寸</th>
+<th>rpx 换算 px (屏幕宽度&#x2F;750)</th>
+<th>px 换算 rpx (750&#x2F;屏幕宽度)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>iPhone5</td>
+<td>320px</td>
+<td>1rpx &#x3D; 0.42px</td>
+<td>1px &#x3D; 2.34rpx</td>
+</tr>
+<tr>
+<td>小米 MIX 2S</td>
+<td>360px</td>
+<td>1rpx &#x3D; 0.48px</td>
+<td>1px &#x3D; 2.083rpx</td>
+</tr>
+<tr>
+<td>iPhone6</td>
+<td>375px</td>
+<td>1rpx &#x3D; 0.5px</td>
+<td>1px &#x3D; 2rpx</td>
+</tr>
+<tr>
+<td>iPhone6 Plus</td>
+<td>414px</td>
+<td>1rpx &#x3D; 0.552px</td>
+<td>1px &#x3D; 1.81rpx</td>
+</tr>
+<tr>
+<td>HUAWEI Mate 10</td>
+<td>480px</td>
+<td>1rpx &#x3D; 0.64px</td>
+<td>1px &#x3D; 1.562rpx</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>样式导入</p>
+<p>使用 @import 语句可以导入外联样式表， @import 后跟需要导入的外联样式表的相对路径，用 ; 表示语句结束。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** common.wxss **/</span></span><br><span class="line">page &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#f0f0f0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** index.wxss **/</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;common.wxss&#x27;</span>;</span><br><span class="line">page &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#f2f2f2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>内联样式</p>
+</li>
+<li><p>外部样式</p>
+</li>
+</ul>
+<p><strong>image 相当于 html 中的 img 标签，用来加载图片。</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 通过 src 属性加载图片 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 通过 mode 属性调整 图片的的显示方式 (裁切/缩放) --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- image 组件默认宽度为300px，默认高度为225px --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">image</span> <span class="attr">src</span>=<span class="string">&quot;../../static/uploads/item_1.png&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;aspectFit&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>关于 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/image.html">mode 有效值</a></p>
+<p><strong>text 相当于 html 中的 span，用来定义文本。</strong></p>
+<p><strong>view 相当于 html 中的 div，一般做为容器出现。</strong></p>
+<p><strong>swiper 滑块组件，可以用来实现类似轮播图布局效果。</strong></p>
+<h2 id="3-基本语法"><a href="#3-基本语法" class="headerlink" title="3.基本语法"></a>3.基本语法</h2><h4 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h4><p>类似<code>vue</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pages/demo/data.js</span></span><br><span class="line"><span class="title class_">Page</span>(&#123;</span><br><span class="line">    <span class="comment">// 通过 data 属性，初始化页面中用到的数据</span></span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="attr">message</span>: <span class="string">&#x27;hello world!&#x27;</span></span><br><span class="line">        <span class="attr">user</span>: &#123;</span><br><span class="line">            <span class="attr">name</span>: <span class="string">&#x27;小明&#x27;</span>,</span><br><span class="line">            <span class="attr">age</span>: <span class="number">16</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">courses</span>: [<span class="string">&#x27;wxml&#x27;</span>, <span class="string">&#x27;wxss&#x27;</span>, <span class="string">&#x27;javascript&#x27;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- pages/demo/data.wxml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">text</span> <span class="attr">class</span>=<span class="string">&quot;msg&quot;</span>&gt;</span>&#123;&#123;message&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">text</span>&gt;</span>我叫&#123;&#123;user.name&#125;&#125;， 我今年&#123;&#123;user.age&#125;&#125;岁了， 我在学习&#123;&#123;courses[0]&#125;&#125;课程。<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="列表数据"><a href="#列表数据" class="headerlink" title="列表数据"></a>列表数据</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pages/demo/data.js</span></span><br><span class="line"><span class="title class_">Page</span>(&#123;</span><br><span class="line">  <span class="comment">// 通过 data 属性，初始化页面中用到的数据</span></span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="attr">brands</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;耐克&#x27;</span>,</span><br><span class="line">        <span class="attr">origin</span>: <span class="string">&#x27;美国&#x27;</span>,</span><br><span class="line">        <span class="attr">category</span>: [<span class="string">&#x27;男装&#x27;</span>, <span class="string">&#x27;女装&#x27;</span>, <span class="string">&#x27;鞋&#x27;</span>, <span class="string">&#x27;体育用品&#x27;</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;SK-II&#x27;</span>,</span><br><span class="line">        <span class="attr">origin</span>: <span class="string">&#x27;韩国&#x27;</span>,</span><br><span class="line">        <span class="attr">category</span>: [<span class="string">&#x27;防晒霜&#x27;</span>, <span class="string">&#x27;面膜&#x27;</span>, <span class="string">&#x27;洗护&#x27;</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- pages/demo/data.wxml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;brands&#125;&#125;&quot;</span> <span class="attr">wx:for-index</span>=<span class="string">&quot;k&quot;</span> <span class="attr">wx:for-item</span>=<span class="string">&quot;v&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">text</span>&gt;</span>&#123;&#123;k+1&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">text</span>&gt;</span>&#123;&#123;v.name&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">text</span>&gt;</span>&#123;&#123;v.origin&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">text</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;v.category&#125;&#125;&quot;</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>wx:for 属性将当前组件按着数组的长度动态创建，并且通过 index 变量可以访问到数组的索引值，通过 item 变量可以访问到单元值。</p>
+<h4 id="block"><a href="#block" class="headerlink" title="block"></a>block</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- pages/demo/data.wxml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">block</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;users&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span>&gt;</span>&#123;&#123;item.name&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span>&gt;</span>&#123;&#123;item.age&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">block</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="条件数据"><a href="#条件数据" class="headerlink" title="条件数据"></a>条件数据</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;users&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span>&gt;</span>&#123;&#123;index+1&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span>&gt;</span>&#123;&#123;item.name&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span>&gt;</span>&#123;&#123;item.age&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span> <span class="attr">wx:if</span>=<span class="string">&quot;&#123;&#123;item.age &lt;= 14&#125;&#125;&quot;</span>&gt;</span>儿童<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span> <span class="attr">wx:elif</span>=<span class="string">&quot;&#123;&#123;item.age &lt;= 18&#125;&#125;&quot;</span>&gt;</span>未成年<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span> <span class="attr">wx:else</span>&gt;</span>成年人<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Page</span>(&#123;</span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="attr">users</span>: [</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">&#x27;小明&#x27;</span>, <span class="attr">age</span>: <span class="number">18</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">&#x27;小红&#x27;</span>, <span class="attr">age</span>: <span class="number">13</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">&#x27;小丽&#x27;</span>, <span class="attr">age</span>: <span class="number">19</span> &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="事件触发"><a href="#事件触发" class="headerlink" title="事件触发"></a>事件触发</h4><p><strong>语法格式： bind:事件名称&#x3D;”回调函数”</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">bind:tap</span>=<span class="string">&quot;sayHi&quot;</span>&gt;</span>点我试试<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">bind:focus</span>=<span class="string">&quot;sayHi&quot;</span> <span class="attr">bind:blur</span>=<span class="string">&quot;sayBye&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pages/demo/data.js</span></span><br><span class="line"><span class="title class_">Page</span>(&#123;</span><br><span class="line">  <span class="attr">sayHi</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Hi~&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">sayHi</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Hi~&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">sayBye</span>: <span class="keyword">function</span> (<span class="params">ev</span>) &#123;</span><br><span class="line">    <span class="comment">// ev  时间对象</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ev);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Bye~&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h4><ul>
+<li><p>子元素用 bindtap 绑定事件后，执行的时候，会冒泡到父元素（触发父亲元素上绑定的 bindtap 事件）</p>
+</li>
+<li><p>如果不想冒泡到父元素，可以用 catchtap 代替</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">botton</span> <span class="attr">catchtap</span>=<span class="string">&quot;goDetail&quot;</span>&gt;</span>catchtap<span class="tag">&lt;/<span class="name">botton</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">botton</span> <span class="attr">bindtap</span>=<span class="string">&quot;goDetail&quot;</span>&gt;</span>bindtap<span class="tag">&lt;/<span class="name">botton</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-生命周期"><a href="#4-生命周期" class="headerlink" title="4.生命周期"></a>4.生命周期</h2><img src="/posts/6316/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" alt="微信小程序的生命周期" style="zoom:67%;">
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag"># 微信小程序</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/40119.html" rel="next" title="Mongoose">
+                <i class="fa fa-chevron-left"></i> Mongoose
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/24755.html" rel="prev" title="moogoDB入门一">
+                moogoDB入门一 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7Carchive">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BC%80%E5%8F%91%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">1.开发准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">2.结构分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 全局配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E9%A1%B5%E9%9D%A2%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 页面配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E9%80%82%E9%85%8D%E3%80%81%E6%A0%B7%E5%BC%8F%E5%92%8C%E7%BB%84%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 适配、样式和组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">3.基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="nav-number">3.0.1.</span> <span class="nav-text">数据绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%95%B0%E6%8D%AE"><span class="nav-number">3.0.2.</span> <span class="nav-text">列表数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#block"><span class="nav-number">3.0.3.</span> <span class="nav-text">block</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%95%B0%E6%8D%AE"><span class="nav-number">3.0.4.</span> <span class="nav-text">条件数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91"><span class="nav-number">3.0.5.</span> <span class="nav-text">事件触发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1"><span class="nav-number">3.0.6.</span> <span class="nav-text">事件冒泡</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">4.</span> <span class="nav-text">4.生命周期</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">heinfy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'CHXFaXIYKCfTPne1Qz1s0qra-gzGzoHsz',
+        appKey: '1tYSQQsYUaRxhDHMo1ujDwb1',
+        placeholder: '(ヾﾉ≧∀≦)o来啊，老铁，快活啊!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
